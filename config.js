@@ -31,7 +31,7 @@ let config = {
         feeds: [
           {
             title: "La Nación",
-            url: "https://www.lanacion.com.ar/rss/cat-1-comprimido.xml"
+            url: "https://www.lanacion.com.ar/feed/"
           },
           {
             title: "Clarín",
@@ -45,24 +45,48 @@ let config = {
       }
     },
 
-    // Carrusel del clima (3 ciudades)
+    // Clima Córdoba
     {
       module: "MMM-NOAA3",
       position: "top_right",
       config: {
         apiKey: "8807579cf272149be204c26f51084d06",
         units: "metric",
+        lat: "-31.4201",
+        lon: "-64.1888",
         showClock: false,
         useHeader: true,
-        updateInterval: 10 * 60 * 1000, // cada 10 min
-        animationSpeed: 1000,
-        rotateCities: true,     // <<< activa el carrusel
-        cityList: [
-          { lat: "-31.4201", lon: "-64.1888", header: "Córdoba" },
-          { lat: "-24.1858", lon: "-65.2995", header: "Jujuy" },
-          { lat: "-25.7965", lon: "-64.9642", header: "Rosario de la Frontera" }
-        ],
-        rotateInterval: 30 * 1000 // cambia ciudad cada 30 seg
+        header: "Córdoba"
+      }
+    },
+
+    // Clima Jujuy
+    {
+      module: "MMM-NOAA3",
+      position: "top_right",
+      config: {
+        apiKey: "8807579cf272149be204c26f51084d06",
+        units: "metric",
+        lat: "-24.1858",
+        lon: "-65.2995",
+        showClock: false,
+        useHeader: true,
+        header: "Jujuy"
+      }
+    },
+
+    // Clima Rosario de la Frontera (Salta)
+    {
+      module: "MMM-NOAA3",
+      position: "top_right",
+      config: {
+        apiKey: "8807579cf272149be204c26f51084d06",
+        units: "metric",
+        lat: "-25.7965",
+        lon: "-64.9642",
+        showClock: false,
+        useHeader: true,
+        header: "Rosario de la Frontera"
       }
     },
 
