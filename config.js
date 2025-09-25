@@ -45,7 +45,6 @@ let config = {
        mode:  "HIDE",    
 	}
 }
-{
     module: 'camera',
     position: 'top_center',
     config: selfieInterval: 3,  // Time interval in seconds before the photo will be taken.
