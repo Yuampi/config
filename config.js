@@ -1,124 +1,122 @@
-/* Config Sample
- *
- * For more information on how you can configure this file
- * see https://docs.magicmirror.builders/configuration/introduction.html
- * and https://docs.magicmirror.builders/modules/configuration.html
+/* MagicMirror² Config
+ * Config adaptado a 1024x600
  */
 
 let config = {
-	address: "localhost",
-	port: 8080,
-	basePath: "/",
-	ipWhitelist: ["127.0.0.1", "::ffff:127.0.0.1", "::1"],
+  address: "0.0.0.0",
+  port: 8080,
+  basePath: "/", 
+  ipWhitelist: [], // [] permite acceso desde cualquier IP
+  useHttps: false,
+  httpsPrivateKey: "",
+  httpsCertificate: "",
 
-	useHttps: false,
-	httpsPrivateKey: "",
-	httpsCertificate: "",
+  language: "es",
+  locale: "es-AR",
+  timeFormat: 24,
+  units: "metric",
 
-	language: "en",
-	locale: "en-US",
-	logLevel: ["INFO", "LOG", "WARN", "ERROR"],
-	timeFormat: 24,
-	units: "metric",
+  modules: [
+    // Reloj
+    {
+      module: "clock",
+      position: "top_left"
+    },
 
-	modules: [
-		{
-			module: 'MMM-SleepWake',
-			config: {
-				delay: 15,
-				mode: "HIDE"
-			}
-		},
-		{
-			module: 'camera',
-			position: 'top_center',
-			config: {
-				selfieInterval: 3,
-				emailConfig: {
-					service: 'Hotmail',
-					auth: {
-						user: '<name@email.com>',
-						pass: '<password>'
-					}
-				}
-			}
-		},
-		{
-			module: 'MMM-WiFiPassword',
-			position: "top_left",
-			config: {
-				network: "Fibertel WiFi321 2.4Ghz",
-				password: "21316365"
-			}
-		},
-		{
-			module: "alert"
-		},
-		{
-			module: "updatenotification",
-			position: "top_bar"
-		},
-		{
-			module: "clock",
-			position: "top_left"
-		},
-		{
-			module: "calendar",
-			header: "US Holidays",
-			position: "top_left",
-			config: {
-				calendars: [
-					{
-						fetchInterval: 7 * 24 * 60 * 60 * 1000,
-						symbol: "calendar-check",
-						url: "https://ics.calendarlabs.com/76/mm3137/US_Holidays.ics"
-					}
-				]
-			}
-		},
-		{
-			module: "compliments",
-			position: "lower_third"
-		},
-		{
-			module: "weather",
-			position: "top_right",
-			config: {
-				weatherProvider: "openmeteo",
-				type: "current",
-				lat: 40.776676,
-				lon: -73.971321
-			}
-		},
-		{
-			module: "weather",
-			position: "top_right",
-			header: "Weather Forecast",
-			config: {
-				weatherProvider: "openmeteo",
-				type: "forecast",
-				lat: 40.776676,
-				lon: -73.971321
-			}
-		},
-		{
-			module: "newsfeed",
-			position: "bottom_bar",
-			config: {
-				feeds: [
-					{
-						title: "New York Times",
-						url: "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml"
-					}
-				],
-				showSourceTitle: true,
-				showPublishDate: true,
-				broadcastNewsFeeds: true,
-				broadcastNewsUpdates: true
-			}
-		}
-	]
+    // Noticias Argentina
+    {
+      module: "newsfeed",
+      position: "bottom_bar",
+      config: {
+        feeds: [
+          {
+            title: "La Nación",
+            url: "https://www.lanacion.com.ar/rss/cat-1-comprimido.xml"
+          },
+          {
+            title: "Clarín",
+            url: "https://www.clarin.com/rss/lo-ultimo/"
+          }
+        ],
+        showSourceTitle: true,
+        showPublishDate: true,
+        broadcastNewsFeeds: true,
+        broadcastNewsUpdates: true
+      }
+    },
+
+    // Clima Córdoba
+    {
+      module: "MMM-NOAA3",
+      position: "top_right",
+      config: {
+        provider: "openweathermap",
+        apiKey: "8807579cf272149be204c26f51084d06",
+        units: "metric",
+        lat: "-31.4201",
+        lon: "-64.1888",
+        showClock: false,
+        useHeader: true,
+        header: "Córdoba"
+      }
+    },
+
+    // Clima Jujuy
+    {
+      module: "MMM-NOAA3",
+      position: "top_right",
+      config: {
+        provider: "openweathermap",
+        apiKey: "8807579cf272149be204c26f51084d06",
+        units: "metric",
+        lat: "-24.1858",
+        lon: "-65.2995",
+        showClock: false,
+        useHeader: true,
+        header: "Jujuy"
+      }
+    },
+
+    // Clima Rosario de la Frontera (Salta)
+    {
+      module: "MMM-NOAA3",
+      position: "top_right",
+      config: {
+        provider: "openweathermap",
+        apiKey: "8807579cf272149be204c26f51084d06",
+        units: "metric",
+        lat: "-25.7965",
+        lon: "-64.9642",
+        showClock: false,
+        useHeader: true,
+        header: "Rosario de la Frontera"
+      }
+    },
+
+    // Promiedos (fútbol argentino)
+    {
+      module: "MMM-Promiedos",
+      position: "top_right",
+      config: {
+        apiUrl: "https://api.promiedos.com.ar/league/tables_and_fixtures/hc",
+        refreshHour: 23,    // Hora del día para actualizar (formato 24h)
+        refreshMinute: 0,   // Minuto exacto
+        animationSpeed: 1000
+      }
+    },
+
+    // Cámara
+    {
+      module: "camera",
+      position: "middle_center",
+      config: {
+        device: "/dev/video0", // normalmente la webcam USB
+        width: 320,
+        height: 240
+      }
+    }
+  ]
 };
 
-/*************** DO NOT EDIT THE LINE BELOW ***************/
-if (typeof module !== "undefined") { module.exports = config; }
+/*************** NO EDITAR DEBAJO ***************/
+if (typeof module !== "undefined") {module.exports = config;}
