@@ -42,8 +42,8 @@ let config = {
     module: 'MMM-SleepWake',
     config:{
        delay:  15,               // default
-       mode:  see below
-    }
+       mode:  "HIDE",    
+	}
 }
 {
     module: 'camera',
